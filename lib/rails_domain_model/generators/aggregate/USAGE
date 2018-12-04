@@ -1,0 +1,8 @@
+Description:
+    Creates an aggregate
+
+Example:
+    rails generate domain:aggregate desk/draft
+
+    This will create:
+        domain/desk/draft.rb

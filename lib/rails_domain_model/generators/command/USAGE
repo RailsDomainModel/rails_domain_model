@@ -1,0 +1,8 @@
+Description:
+    Creates a command
+
+Example:
+    rails generate domain:command desk/store_draft
+
+    This will create:
+        domain/zetland/desk/commands/store_draft.rb

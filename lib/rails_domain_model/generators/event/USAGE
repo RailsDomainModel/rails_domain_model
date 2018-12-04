@@ -1,0 +1,8 @@
+Description:
+    Creates a domain event
+
+Example:
+    rails generate domain:event desk/draft_stored
+
+    This will create:
+        domain_model/domain/desk/events/draft_stored.rb
