@@ -1,8 +1,4 @@
-require 'aggregate_root'
-
-AggregateRoot.configure do |config|
-  config.default_event_store = RailsEventStore::Client.new
-end
+require 'aggregate_root/default_apply_strategy'
 
 class RailsDomainModel::Aggregate
 
@@ -66,7 +62,7 @@ class RailsDomainModel::Aggregate
   end
 
   def _default_event_store
-    AggregateRoot.configuration.default_event_store
+    Rails.configuration.event_store
   end
 
   def _events_enumerator(event_store, stream_name)
