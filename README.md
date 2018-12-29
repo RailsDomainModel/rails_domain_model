@@ -14,9 +14,7 @@ Or install it yourself as:
 
     $ gem install rails_domain_model
 
-## Usage
-
-# Setup
+To get `RailsEventStore` going:
 
 ````
 $ spring stop # if you use spring
@@ -24,7 +22,9 @@ $ rails generate rails_event_store_active_record:migration
 $ rake db:create db:migrate
 ````
 
-# Commands
+## Usage
+
+### Commands
 
 ````
 $ rails generate domain:command desk/store_draft
@@ -41,7 +41,7 @@ class Domain::Desk::Commands::StoreDraft < DomainCommand
   validates :title, presence: true
 end
 ````
-# Aggregates
+### Aggregates
 
 ````bash
 $ rails generate domain:aggregate desk/draft
@@ -68,7 +68,7 @@ class Domain::Desk::Draft < DomainAggregate
 end
 ````
 
-# Domain events
+### Domain events
 
 ````bash
 $ rails generate domain:event desk/draft_stored
