@@ -15,6 +15,10 @@ module Domain
           template 'domain_command.rb', 'domain_model/domain_command.rb'
         end
 
+        if !File.exists?('config/initializers/rails_domain_model.rb')
+          template 'initializer.rb', 'config/initializers/rails_domain_model.rb'
+        end
+
         application do
           "config.paths.add 'domain_model', eager_load: true"
         end

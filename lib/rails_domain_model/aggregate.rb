@@ -1,7 +1,6 @@
 require 'aggregate_root/default_apply_strategy'
 
 class RailsDomainModel::Aggregate
-
   def self.on(*event_klasses, &block)
     event_klasses.each do |event_klass|
       name = event_klass.name || raise(ArgumentError, "Anonymous class is missing name")

@@ -9,8 +9,8 @@ module Domain
         @context = class_path.first
         @klass = file_name
 
-        command_file = "domain_model/domain/#{@context}/events/#{@klass}.rb"
-        template "event.rb", command_file
+        event_file = "domain_model/domain/#{@context}/events/#{@klass}.rb"
+        template "event.rb", event_file
 
         if !File.exists?('domain_model/domain_event.rb')
           template 'domain_event.rb', 'domain_model/domain_event.rb'
