@@ -1,3 +1,7 @@
+## Goal
+
+Make Bounded Contexts, Event Sourcing and CQRS available in a "conventions over configuation"-way.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -12,38 +16,52 @@ And then execute:
 
 To get `RailsEventStore` going:
 
-````
+```
 $ spring stop # if you use spring
 $ rails generate rails_event_store_active_record:migration
 $ rake db:create db:migrate
-````
+```
 
-## Usage
+## Concepts
 
-### Commands
+### Bounded Context
 
-````
-$ rails generate domain:command desk/store_draft
-````
+To help you establish a Ubiquitous Language, `rails_domain_model` assumes your domain is divided into Bounded Contexts.
 
-````ruby
-# domain_model/desk/commands/store_draft.rb
+If this concept is new to you, please familiarize yourself with it, before going any further.
 
-class Domain::Desk::Commands::StoreDraft < DomainCommand
-  with_aggregate Domain::Desk::Draft, :draft_id, :store
-  
-  attr_accessor :title, :body, :draft_id
-  
-  validates :title, presence: true
+The canonical source of Bounded Context is Eric Evans book Domain-Driven Design.
+
+Martin Fowler has a short introduction in his article [BoundedContext](https://martinfowler.com/bliki/BoundedContext.html).
+
+In `rails_domain_model` Bounded Contexts are just modules that are used to namespace everything else. So all the following concepts relate to a Bounded Context some way or another.
+
+### Domain events
+
+A domain event encapsulates that something happened that somebody cares about.
+
+```bash
+$ rails generate domain:event desk/draft_stored
+```
+
+```ruby
+# domain_model/domain/desk/events/draft_stored.rb
+
+class Domain::Desk::Events::DraftStored < DomainEvent
 end
-````
+```
+
 ### Aggregates
 
-````bash
-$ rails generate domain:aggregate desk/draft
-````
+An aggregate is an object, whose current state is the sum (aggregate) of all it's associated domain events. 
 
-````ruby
+The current state is calculated by _applying_ all historic events.
+
+```bash
+$ rails generate domain:aggregate desk/draft
+```
+
+```ruby
 # domain_model/domain/desk/draft.rb
 
 class Domain::Desk::Draft < DomainAggregate
@@ -62,20 +80,30 @@ class Domain::Desk::Draft < DomainAggregate
   end
   
 end
-````
+```
 
-### Domain events
+### Commands
 
-````bash
-$ rails generate domain:event desk/draft_stored
-````
+A command captures the semantics of an intention to change state.
 
-````ruby
-# domain_model/domain/desk/events/draft_stored.rb
+It defines what has to be present when wanting to alter the state in a specific way.
 
-class Domain::Desk::Events::DraftStored < DomainEvent
+```
+$ rails generate domain:command desk/store_draft
+```
+
+```ruby
+# domain_model/desk/commands/store_draft.rb
+
+class Domain::Desk::Commands::StoreDraft < DomainCommand
+  with_aggregate Domain::Desk::Draft, :draft_id, :store
+  
+  attr_accessor :title, :body, :draft_id
+  
+  validates :title, presence: true
 end
-````
+```
+
 
 ## Development
 
