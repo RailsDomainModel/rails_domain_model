@@ -22,6 +22,13 @@ $ rails generate rails_event_store_active_record:migration
 $ rake db:create db:migrate
 ```
 
+## Dependencies
+
+- [Rails Event Store](https://railseventstore.org)
+- [RabbitMQ](https://www.rabbitmq.com/download.html)
+- [Sneakers](http://jondot.github.io/sneakers/)
+- [Redis](https://redis.io)
+
 ## Concepts
 
 ### Bounded Context
@@ -96,11 +103,11 @@ $ rails generate domain:command desk/store_draft
 # domain_model/desk/commands/store_draft.rb
 
 class Domain::Desk::Commands::StoreDraft < DomainCommand
-  with_aggregate Domain::Desk::Draft, :draft_id, :store
-  
-  attr_accessor :title, :body, :draft_id
-  
-  validates :title, presence: true
+  attr_accessor :body, :draft_id
+
+  alias_method :aggregate_id, :draft_id
+
+  with_aggregate Domain::Desk::Draft, call: :store
 end
 ```
 
