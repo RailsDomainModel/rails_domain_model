@@ -1,6 +1,14 @@
 ## Goal
 
-Make Bounded Contexts, Event Sourcing and CQRS available in a "conventions over configuation"-way.
+Make Bounded Contexts, Event Sourcing and CQRS available in a "convention over configuation"-way.
+
+## Why?
+
+Beacuse Ubiquitous Language!
+
+All the concepts and building blocks in RailsDomainModel will help you implement your business' Ubiquitous Language.
+
+It allows you to break free of the vocabulary used in controllers and models of Ruby On Rails. Those vocabularies are tied to HTTP/REST and databases respectively and you want to use the vocabulary used by your business. I.e. the Ubiquitous Language.
 
 ## Installation
 
@@ -31,9 +39,17 @@ $ rake db:create db:migrate
 
 ## Concepts
 
-### Bounded Context
+The core concepts in RailsDomainModel is
 
-To help you establish a Ubiquitous Language, `rails_domain_model` assumes your domain is divided into Bounded Contexts.
+- [Bounded Contexts](#bounded_context)
+- [Domain events](#domain_event)
+- [Commands](#commands)
+- [Aggregates](#aggregates)
+- [Event Processors](#event_processors)
+
+### Bounded Contexts
+
+To help you establish a Ubiquitous Language, RailsDomainModel assumes your domain is divided into Bounded Contexts.
 
 If this concept is new to you, please familiarize yourself with it, before going any further.
 
@@ -41,7 +57,7 @@ The canonical source of Bounded Context is Eric Evans book Domain-Driven Design.
 
 Martin Fowler has a short introduction in his article [BoundedContext](https://martinfowler.com/bliki/BoundedContext.html).
 
-In `rails_domain_model` Bounded Contexts are just modules that are used to namespace everything else. So all the following concepts relate to a Bounded Context some way or another.
+In RailsDomainModel a Bounded Contexts are just modules that are used to namespace everything else. So all the following concepts relate to a Bounded Context some way or another.
 
 ### Domain events
 
@@ -111,6 +127,9 @@ class Domain::Desk::Commands::StoreDraft < DomainCommand
 end
 ```
 
+### Event Processors
+
+WIP
 
 ## Development
 
