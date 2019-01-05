@@ -4,11 +4,15 @@ Make Bounded Contexts, Event Sourcing and CQRS available in a "convention over c
 
 ## Why?
 
-Beacuse Ubiquitous Language!
+### Ubiquitous Language
 
 All the concepts and building blocks in RailsDomainModel will help you implement your business' Ubiquitous Language.
 
 It allows you to break free of the vocabulary used in controllers and models of Ruby On Rails. Those vocabularies are tied to HTTP/REST and databases respectively and you want to use the vocabulary used by your business. I.e. the Ubiquitous Language.
+
+### Decomposition
+
+Which will give you scalability both regarding performance and complexity.
 
 ## Installation
 
