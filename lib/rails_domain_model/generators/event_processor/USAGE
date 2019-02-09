@@ -1,0 +1,8 @@
+Description:
+    Creates an event processor
+
+Example:
+    rails generate domain:event_processor default
+
+    This will create:
+        app/event_processors/default.rb

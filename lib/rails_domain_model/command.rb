@@ -7,15 +7,14 @@ class RailsDomainModel::Command
   end
 
   class << self
-    attr_accessor :aggregate_class, :aggregate_id_attribute, :aggregate_method
+    attr_accessor :aggregate_class, :aggregate_id, :aggregate_method
   end
 
-  def self.with_aggregate(klass, id_attribute, method)
-    @aggregate_class        = klass
-    @aggregate_id_attribute = id_attribute
-    @aggregate_method       = method
+  def self.with_aggregate(klass, call:)
+    @aggregate_class  = klass
+    @aggregate_method = call
 
-    validates @aggregate_id_attribute, presence: true
+    validates :aggregate_id, presence: true
   end
 
   def execute!
@@ -23,6 +22,9 @@ class RailsDomainModel::Command
 
     RailsDomainModel::CommandHandler.new(self).handle!
   end
+
+  def aggregate_id
+    raise NotImplementedError.new('You should implement the aggregate_id')
 
   private
 

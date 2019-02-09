@@ -34,12 +34,20 @@ $ rails generate rails_event_store_active_record:migration
 $ rake db:create db:migrate
 ```
 
+And then add the file `config/initializers/rails_event_store.rb` with the following contents:
+
+```ruby
+Rails.configuration.to_prepare do
+  Rails.configuration.event_store = RailsEventStore::Client.new
+end
+```
+
 ## Dependencies
 
 - [Rails Event Store](https://railseventstore.org)
 - [RabbitMQ](https://www.rabbitmq.com/download.html)
 - [Sneakers](http://jondot.github.io/sneakers/)
-- [Redis](https://redis.io)
+- [Redis](https://redis.io) (For replaying)
 
 ## Concepts
 

@@ -20,7 +20,7 @@ class RailsDomainModel::CommandHandler
   end
 
   def aggregate_id
-    @command.send(@command.class.aggregate_id_attribute)
+    @command.aggregate_id
   end
 
   def aggregate_method

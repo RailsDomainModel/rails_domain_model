@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency             "rails", "~> 5"
   spec.add_dependency             "rails_event_store", "~> 0.34"
   spec.add_dependency             "sneakers", "~> 2.7"
+  spec.add_dependency             "bunny", "~> 2.7"
 end
